@@ -1,0 +1,5 @@
+C:/Users/mateu/Git2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mateu/Git2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mateu/Git2/cmake-build-debug/allocations_basics/CMakeFiles/allocation_basics.dir
+C:/Users/mateu/Git2/cmake-build-debug/allocations_basics/CMakeFiles/edit_cache.dir
+C:/Users/mateu/Git2/cmake-build-debug/allocations_basics/CMakeFiles/rebuild_cache.dir
