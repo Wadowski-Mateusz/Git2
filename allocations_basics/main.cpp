@@ -9,7 +9,7 @@ using namespace std;
 //class math{
 //public:
 //    math::add(double a, double b);
-//    subrstract():
+//    subrstract();
 //    volume();
 //    help();
 //};
