@@ -6,13 +6,13 @@
 
 using namespace std;
 
-//class math{
-//public:
-//    math::add(double a, double b);
-//    subrstract();
-//    volume();
-//    help();
-//};
+class math{
+public:
+    add(double a, double b){};
+    subrstract(){};
+    volume(){};
+    help(){};
+};
 
 
 int main(int argc, char *argv[]) { // liczba argumentow, argumenty
