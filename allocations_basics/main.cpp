@@ -15,6 +15,9 @@ public:
 };
 
 
+//include <striong>
+// stoi(Str.argv[1]) // konwersja ze string do liczby (int)
+
 int main(int argc, char *argv[]) { // liczba argumentow, argumenty
 
 ////    int *n = new int;
