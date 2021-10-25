@@ -1,0 +1,3 @@
+C:/Users/mateu/CLionProjects/Git2/11_10_2021/allocations_basics/cmake-build-debug/CMakeFiles/allocation_basics.dir
+C:/Users/mateu/CLionProjects/Git2/11_10_2021/allocations_basics/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/11_10_2021/allocations_basics/cmake-build-debug/CMakeFiles/rebuild_cache.dir
