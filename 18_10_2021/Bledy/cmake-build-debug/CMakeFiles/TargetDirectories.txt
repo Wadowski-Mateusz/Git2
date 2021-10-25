@@ -1,0 +1,5 @@
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/Bledy/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/Bledy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/Bledy/cmake-build-debug/src/CMakeFiles/src.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/Bledy/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/Bledy/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir

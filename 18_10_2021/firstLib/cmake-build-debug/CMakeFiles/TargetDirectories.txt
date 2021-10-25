@@ -1,0 +1,8 @@
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/firstLibCall/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/firstLibCall/CMakeFiles/firstLib.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/firstLibCall/CMakeFiles/rebuild_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/include/CMakeFiles/firstLibb.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/include/CMakeFiles/edit_cache.dir
+C:/Users/mateu/CLionProjects/Git2/18_10_2021/firstLib/cmake-build-debug/include/CMakeFiles/rebuild_cache.dir
