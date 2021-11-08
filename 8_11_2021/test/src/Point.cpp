@@ -4,28 +4,28 @@
 
 #include "Point.h"
 
-Point::Point(double x, double y, string name) : name(name) {
+Point::Point(const double x,const  double y, const string name) : name(name) {
     *this->x = x;
     *this->y = y;
 }
 
-Point::Point(string name) : name(name) {
+Point::Point(const string name) : name(name) {
     *x = *y = 0;
 }
 
-double Point::getX() {
+double Point::getX() const{
     return *x;
 }
 
-void Point::setX(double x) {
+void Point::setX(const double x) {
     *this->x = x;
 }
 
-double Point::getY() {
+double Point::getY() const{
     return *y;
 }
 
-void Point::setY(double y) {
+void Point::setY(const double y) {
     *this->y = y;
 }
 
@@ -33,7 +33,7 @@ void Point::printData() const {
     cout << "Point " << name << " (x = " << *x << ", y = " << *y << ")\n";
 }
 
-void Point::setName(string name) {
+void Point::setName(const string name) {
     this->name = name;
 }
 
@@ -56,7 +56,7 @@ Point::~Point(){
     delete y;
 }
 
-Point::Point(Point &point){
+Point::Point(const Point &point){
     *x = point.getX(); // lub *x = *point.x;
     *y = point.getY(); // lub *y = *point.y;
     name = point.getName();

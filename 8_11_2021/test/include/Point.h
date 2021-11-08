@@ -23,43 +23,43 @@ public:
      * @param y y coordinate of point
      * @param name name of point
      */
-    Point(double x, double y, string name);
+    Point(const double x, const double y, const string name);
 
     /**
      * Create point in 0, 0
      * @param name name of point
      */
-    Point(string name);
+    Point(const string name);
 
     /**
      * Update name of point
      * @param name new point name
      */
-    void setName(string name);
+    void setName(const string name);
 
     /**
      * Get value of x
      * @return x
      */
-    double getX();
+    double getX() const;
 
     /**
      * Update x value
      * @param x new x value
      */
-    void setX(double x);
+    void setX(const double x);
 
     /**
      * Get value of y
      * @return y
      */
-    double getY();
+    double getY() const;
 
     /**
      * Update y value
      * @param y new y value
      */
-    void setY(double y);
+    void setY(const double y);
 
     /**
      * Print data about point (x and y)
@@ -78,7 +78,7 @@ public:
 
     ~Point();
 
-    Point(Point &);
+    Point(const Point &);
 
 };
 

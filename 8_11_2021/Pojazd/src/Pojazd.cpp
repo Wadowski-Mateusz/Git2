@@ -22,6 +22,7 @@ void Pojazd::printData() const{
     for(int i = 0; i < ilosc_miejsc; i++)
         cout<<"\t"<<godnosc[i];
     cout<<"\nMarka i typ: "<<this->marka_i_typ<<endl;
+    cout<<"Wersja oprogramowania: "<<this->zainstalowana_wersja_oprogramowania<<endl<<endl;
 }
 
 void Pojazd::setGodnosc(const int i, const string god){
@@ -56,3 +57,18 @@ void Pojazd::set_numer_rejestracyjny(const string numer_rejestracyjny){
     this->numer_rejestracyjny = numer_rejestracyjny;
 }
 
+string Pojazd::get_najnowsza_wersja_oprogramowania() const{
+    return najnowsza_wersja_oprogramowania;
+}
+string Pojazd::get_zainstalowana_wersja_oprogramowania() const{
+    return zainstalowana_wersja_oprogramowania;
+}
+void Pojazd::aktualizuj_zainstalowana_wersja_oprogramowania(){
+    this->zainstalowana_wersja_oprogramowania = Pojazd::najnowsza_wersja_oprogramowania;
+}
+
+string Pojazd::najnowsza_wersja_oprogramowania = "v 1.0";
+
+void Pojazd::opublikuj_Nowe_Oprogramowanie(const string wersja){
+    najnowsza_wersja_oprogramowania = wersja;
+}

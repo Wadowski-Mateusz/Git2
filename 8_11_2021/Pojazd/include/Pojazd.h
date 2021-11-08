@@ -11,7 +11,8 @@ using namespace std;
 
 class Pojazd {
 private:
-
+   static string najnowsza_wersja_oprogramowania;
+   string zainstalowana_wersja_oprogramowania = "v0.1 BETA";
    string numer_rejestracyjny;
    string nazwa;
    unsigned short ilosc_miejsc;
@@ -44,10 +45,14 @@ public:
     void set_nazwa(const string);
     void set_numer_rejestracyjny(const string);
 
+    string get_najnowsza_wersja_oprogramowania()const;
+
+    string get_zainstalowana_wersja_oprogramowania()const;
+    void aktualizuj_zainstalowana_wersja_oprogramowania();
+
+    static void opublikuj_Nowe_Oprogramowanie(const string wersja);
 
 };
-
-
 
 
 
