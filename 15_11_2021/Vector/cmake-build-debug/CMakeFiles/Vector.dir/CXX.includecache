@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Vector.h
+iostream
+-
+cstdio
+-
+math.h
+-
+
+C:/Users/mateu/CLionProjects/Git2/15_11_2021/Vector/src/main.cpp
+Vector.h
+C:/Users/mateu/CLionProjects/Git2/15_11_2021/Vector/src/Vector.h
+

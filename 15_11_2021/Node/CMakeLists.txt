@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Pojazd)
+project(Node)
 include_directories(include)
 
-add_executable(Pojazd src/main.cpp src/Vector.cpp)
+add_executable(Node src/main.cpp src/Node.cpp)

@@ -3,16 +3,16 @@
 //
 
 //#include <iostream>
-#include "Pojazd.h"
+#include "Vector.h"
 
 using namespace std;
 
 int main() {
 
-    Pojazd p("KOKOS", "ANANAS", 3, "kokos i ananas");
+    Vector p("KOKOS", "ANANAS", 3, "kokos i ananas");
     p.printData();
 
-    Pojazd pp = p;
+    Vector pp = p;
 
 
     pp.set_nazwa("const string");
@@ -24,7 +24,7 @@ int main() {
 
     pp.printData();
 
-    Pojazd::opublikuj_Nowe_Oprogramowanie("ver ultimate 1000.909");
+    Vector::opublikuj_Nowe_Oprogramowanie("ver ultimate 1000.909");
 
     pp.aktualizuj_zainstalowana_wersja_oprogramowania();
 

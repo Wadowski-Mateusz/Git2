@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/mateu/CLionProjects/Git2/15_11_2021/Imaginary/include/Imaginary.h
+iostream
+-
+cstdio
+-
+math.h
+-
+
+C:/Users/mateu/CLionProjects/Git2/15_11_2021/Imaginary/src/main.cpp
+../include/Imaginary.h
+C:/Users/mateu/CLionProjects/Git2/15_11_2021/Imaginary/include/Imaginary.h
+

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Pojazd {
+class Vector {
 private:
    static string najnowsza_wersja_oprogramowania;
    string zainstalowana_wersja_oprogramowania = "v0.1 BETA";
@@ -23,7 +23,7 @@ private:
 public:
 
     //Stwórz konstruktor przyjmujący powyższe wartości.
-    Pojazd(const string numer, const string nazwa, const unsigned short ilosc, string marka_i_typ);
+    Vector(const string numer, const string nazwa, const unsigned short ilosc, string marka_i_typ);
 
     //Stwórz metodę wypisującą na ekran wszystkie informacje.
     void printData() const;
@@ -32,7 +32,7 @@ public:
     void setGodnosc(const int, const string);
 
     //Stwórz konstruktor kopiujący.
-    Pojazd(const Pojazd &);
+    Vector(const Vector &);
 
 
 
