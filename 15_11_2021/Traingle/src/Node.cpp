@@ -29,3 +29,7 @@ double Node::getx() const{
 double Node::gety() const{
     return this->y;
 }
+std::ostream & operator<<(std::ostream& output, const Node &n){
+    output<<"("<<n.x<<", "<< n.y<< ")";
+    return output;
+}

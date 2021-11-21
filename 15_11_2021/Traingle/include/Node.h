@@ -24,7 +24,7 @@ public:
     friend double pointDistance(Node a, Node b);
     double getx() const;
     double gety() const;
-
+    friend std::ostream & operator<<(std::ostream& output, const Node &n);
     //friend Triangle::Triangle;
 };
 

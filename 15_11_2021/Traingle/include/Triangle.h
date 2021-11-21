@@ -10,12 +10,19 @@
 
 class Triangle {
 private:
-    Node a, b, c;
+    Node i[3];
     std::string name;
 public:
+    Triangle();
     Triangle(Node a, Node b, Node c, std::string name);
+    friend std::ostream & operator<<(std::ostream& output, const Triangle &t);
     void display()const;
+
+    double distance(int firstPointIndex, int secondPointIndex);
 };
 
+void showTriangleData(Triangle triangle);
+void showTriangleData(Triangle &triangle);
+void showTriangleData(Triangle *triangle);
 
 #endif //VECTOR_TRAINGLE_H
