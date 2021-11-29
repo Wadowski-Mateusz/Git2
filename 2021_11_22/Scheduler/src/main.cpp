@@ -10,7 +10,7 @@ class Scheduler;
 class Task;
 
 int main(){
-    Scheduler s = Scheduler((unsigned)1);
+    Scheduler *s = new Scheduler((unsigned)1);
 }
 
 class Task{
