@@ -6,15 +6,13 @@
 #define BACKPACK_OTHER_H
 #include "Item.h"
 
-extern int allo;
-
 class Other : public Item{
 protected:
     int value;
     int const id = other;
 public:
 
-    Other(std::string name, int const &value, double const size = 1);
+    Other(std::string const &name, int const &value, double const &size = 1);
     ~Other();
 
     /**

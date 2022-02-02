@@ -6,8 +6,6 @@
 #define BACKPACK_NODE_H
 #include <iostream>
 
-extern int allo;
-
 /**
  * @brief node of List<class T> container
  * @tparam T class to storage
@@ -60,8 +58,6 @@ template <class T>
 Node<T>::Node(T* const t, Node<T>* next){
     this -> t = t;
     this -> next = next;
-    allo++;
-    //cout<<"Node: Allo++\n";
 };
 
 template <class T>
@@ -92,6 +88,4 @@ template <class T>
 Node<T>::~Node(){
     //cout<<"destruktor node\n";
     delete this -> t;
-    allo--;
-    //cout<<"Node: Allo--\n";
 }

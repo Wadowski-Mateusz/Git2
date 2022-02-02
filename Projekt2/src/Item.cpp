@@ -5,13 +5,12 @@
 
 Item::Item(){
     //std::cout<<"Item\n";
-    allo++;
+
 }
 
 //if not virtual ~, then only this ~ will be called for successors classes
 Item::~Item(){
     //std::cout<<"~Item\n";
-    allo--;
 };
 
 std::string Item::get_name() const{

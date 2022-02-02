@@ -40,7 +40,7 @@ void Backpack::print_enum(std::string const separator) const {
 
 
 void Backpack::print(int const no, std::string const separator) const {
-    int i = 0;
+    int i = 1;
     Node<Item> *tmp = this->head;
     while (i != no && tmp != nullptr) {
         tmp = tmp->get_next();
@@ -102,9 +102,11 @@ void Backpack::push(Item* const item) {
 
 
 Item* Backpack::pop(){
-    if(this -> head != nullptr)
-        this -> current_size -= this -> head -> get_t() -> get_size();
-    return this -> List<Item>::pop();
+    if(this -> head != nullptr) {
+        this->current_size -= this->head->get_t()->get_size();
+        return this->List<Item>::pop();
+    }
+    return nullptr;
 }
 
 void Backpack::delete_head(){

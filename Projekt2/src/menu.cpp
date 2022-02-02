@@ -43,12 +43,17 @@ int menu_loop(void (*f)(), int const min, int const max) {
     do {
         f();
         cin >> action;
-
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(256,'n');
+            cout << "Brak wybranej akcji\n\n";
+            continue;
+        }
         if (min <= action && action <= max)
             break;
 
         cout << "Brak wybranej akcji\n\n";
     } while (true);
     return action;
-};
+}
 

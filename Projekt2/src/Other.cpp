@@ -4,7 +4,7 @@
 
 #include "../include/Other.h"
 
-Other::Other(std::string name, int const &value, double const size) : value(value) {
+Other::Other(std::string const &name, int const &value, double const &size) : value(value) {
     this->size = size;
     this->name = name;
     //std::cout<<"Other:\n";

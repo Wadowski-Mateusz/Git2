@@ -6,7 +6,6 @@
 #define BACKPACK_LIST_H
 
 #include "Node.h"
-extern int allo;
 
 /**
  * @brief container for given class, LIFO list
@@ -82,8 +81,6 @@ public:
 template <class T>
 List<T>::List(){
     this -> head = nullptr;
-    allo++;
-    //cout<<"List: Allo++\n";
 }
 
 template <class T>
@@ -91,7 +88,6 @@ List<T>::~List(){
     while(this -> head != nullptr){
         delete_head();
     }
-    allo--;
     //cout<<"List: Allo--\n";
 }
 

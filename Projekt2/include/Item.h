@@ -5,7 +5,7 @@
 #ifndef BACKPACK_ITEM_H
 #define BACKPACK_ITEM_H
 #include <iostream>
-extern int allo;
+
 
 /**
  * @brief id of class

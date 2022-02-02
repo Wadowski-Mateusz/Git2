@@ -11,10 +11,9 @@
 #include "../include/Backpack.h"
 #include "../include/csv.h"
 #include "../include/menu.h"
+#include "../include/Exceptions.h"
 
 using namespace std;
-
-int allo = 0;
 
 /**
  * @brief loop while user gives number bigger than t
@@ -49,7 +48,7 @@ int main(int argc, char *argv[]) {
 
     if (argc > 2) {
         cout << "Za duzo argumentow!\n";
-        return 1;
+        exit(1);
     }
 
     srand(time(nullptr));
@@ -66,10 +65,16 @@ int main(int argc, char *argv[]) {
                     cout << "\t1. Tak\n"
                             "\t2. Nie" << endl;
                     cin >> action;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(256,'\n');
+                        cout << "Brak wybranej akcji\n\n";
+                        continue;
+                    }
                     if (action == 1 || action == 2)
                         break;
-
                     cout << "Brak wybranej akcji\n\n";
+
                 } while (true);
 
                 if (action == 1) {
@@ -82,119 +87,92 @@ int main(int argc, char *argv[]) {
 
             case close_program:
                 cout << "Pa Pa\n";
+                delete backpack;
                 return 0;
-
-
-            default:
-                cout << "Blad case1\n";
-                exit(1);
         }
     }
     else { //argc == 2
-        if(string(argv[1]).length() < 5){
-            cout<<"Problem z plikiem"<<endl;
-            exit(1);
-        }
-        else{
-            string tmp(argv[1]);
-            int len = tmp.length();
-            if(tmp[len-4] != '.' || tmp[len-3] != 'c' || tmp[len-2] != 's' || tmp[len-1] != 'v'){
-                cout<<"Zle rozszerzenie pliku!\n";
-                exit(1);
-            }
-        }
         try{
+            if(string(argv[1]).length() < 5)
+                throw File_Exception("Blad odczytu pliku", &file);
+            else{
+                string tmp(argv[1]);
+                int len = tmp.length();
+                if(tmp[len-4] != '.' || tmp[len-3] != 'c' || tmp[len-2] != 's' || tmp[len-1] != 'v')
+                    throw File_Exception("Zle rozszerzenie pliku", &file);
+            }
             string path ="../data/" + string(argv[1]);
+
             file.open(path, ios::in);
             if(!file.good())
-                  throw "Brak pliku\n";
-        } catch (const char* msg){
-            cout << msg;
-            exit (1);
-        }
+                  throw File_Exception("Brak pliku", &file);
 
-        vector<string> data;
-        separate(data,file);
+            vector<string> data;
+            separate(data,file);
 
-        if(file.is_open())
-            file.close();
+            if(file.is_open())
+                file.close();
 
-        vector<string>::reverse_iterator rit = data.rbegin();
-        if(rit == data.rend()){
-            cout<< "Plik pusty!\n";
-            exit (1);
-        }
+            vector<string>::reverse_iterator rit = data.rbegin();
+            if(rit == data.rend())
+                throw File_Exception("Pusty plik", &file);
 
-        try {
             backpack = new Backpack(stoi(*rit));
-        } catch (const invalid_argument &excep) {
-            cout << "Rozmiar " << *rit << " jest niewlasciwy!";
-            delete backpack;
-            exit(1);
-        }
-        if (backpack->get_max_size() <= 0) {
-            cout << "Rozmiar plecaka musi byc dodatni!\n";
-            delete backpack;
-            exit(1);
-        }
-        rit++;
 
-        while(rit != data.rend()){
-            int type;
-            try {
+            if (backpack->get_max_size() <= 0) {
+                cout << "Rozmiar plecaka musi byc dodatni!\n";
+                delete backpack;
+                exit(1);
+            }
+            rit++;
+
+            while(rit != data.rend()){
+                int type;
                 type = stoi(*rit++);
-            }catch (const invalid_argument& excep){
-                cout<< "Klasa \""<< *rit <<"\" nie istnieje!\n";
-                delete backpack;
-                exit (1);
-            }
-            string name = *rit++;
-            double size;
-            try {
+                string name = *rit++;
+                double size;
                 size = stod(*rit++);
-            } catch  (const invalid_argument& excep){
-                cout<< "Bledny rozmiar!"<<*rit<<"\n";
-                delete backpack;
-                exit (1);
-            }
-            switch(type) {
-                case food:{
-                    string expiry_date = *rit++;
-                    backpack->push (new Food(name, size, expiry_date));
-                    break;
-                }
 
-                case drink:{
-                    string expiry_date = *rit++;
-                    double volume;
-                    try {
+                switch(type) {
+                    case food:{
+                        string expiry_date = *rit++;
+                        backpack->push (new Food(name, size, expiry_date));
+                        break;
+                    }
+
+                    case drink:{
+                        string expiry_date = *rit++;
+                        double volume;
                         volume = stod(*rit++);
-                    } catch  (const invalid_argument& excep){
-                        cout<< "Bledna wartosc!\n";
-                        delete backpack;
-                        exit (1);
-                    }
-                    backpack->push (new Drink(name, size, expiry_date, volume));
-                    break;
-                }
 
-                case other:{
-                    int value;
-                    try {
+                        backpack->push (new Drink(name, size, expiry_date, volume));
+                        break;
+                    }
+
+                    case other:{
+                        int value;
                         value = stoi(*rit++);
-                    } catch  (const invalid_argument& excep){
-                        cout<< "Bledna wartosc!\n";
-                        delete backpack;
-                        exit (1);
+                        backpack->push (new Other(name, value, size));
+                        break;
                     }
-                    backpack->push (new Other(name, value, size));
-                    break;
-                }
 
-                default:
-                    cout<<"Blad z plikiem - nieznana klasa\n";
-                    exit(1);
+                    default:
+                        cout<<"Blad z plikiem - nieznana klasa\n";
+                        exit(1);
+                }
             }
+        } catch (File_Exception &ex){
+            cout<<ex.what()<<endl;
+            delete backpack;
+            if(ex.get_file()->is_open())
+                ex.get_file()->close();
+            exit (1);
+        } catch (invalid_argument &ex){
+            cout<<"Blad odczytu z pliku!\n";
+            delete backpack;
+            if(file.is_open())
+                file.close();
+            exit(1);
         }
     }
 
@@ -266,14 +244,27 @@ int main(int argc, char *argv[]) {
 
 
             case pop:
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 backpack->pop()->print();
+                cout<<endl;
                 break;
 
             case delete_head:
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 backpack->delete_head();
                 break;
 
             case delete_item: {
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
 
                 int number = get_bigger(0, "Podaj numer przedmiotu do usuniecia\n", "Wartosc musi byc dodatnia!\n");
 
@@ -284,10 +275,18 @@ int main(int argc, char *argv[]) {
             }
 
             case print_all:
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 backpack->print();
                 break;
 
             case print_one: {
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 int number = get_bigger(0, "Podaj numer przedmiotu do wyswietlenia\n", "Wartosc musi byc dodatnia!\n");
                 backpack->print(number);
 
@@ -295,6 +294,10 @@ int main(int argc, char *argv[]) {
             }
 
             case print_enum:
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 backpack->print_enum();
                 break;
 
@@ -304,6 +307,10 @@ int main(int argc, char *argv[]) {
                 break;
 
             case clean:
+                if(backpack -> get_head() == nullptr){
+                    cout<<"Brak przedmiotow w plecaku!\n";
+                    break;
+                }
                 backpack->clean();
                 cout << "Oprozniono plecak" << endl;
                 break;
@@ -313,6 +320,12 @@ int main(int argc, char *argv[]) {
                 do {
                     cout << "Podaj rozmiar:\n";
                     cin >> size;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(256,'\n');
+                        cout << "Zly rozmiar!\n\n";
+                        continue;
+                    }
                     if (size <= 0 || size <  backpack->get_current_size())
                         cout << "Zly rozmiar!\n\n";
                     else
@@ -338,13 +351,17 @@ int main(int argc, char *argv[]) {
                     }
                 } while (okay);
 
-                file.open("../data/"+file_name+".csv", ios::out);
-                if(!file.good()){
-                    cout<<"Blad otwarcia pliku!\n";
+                try {
+                    file.open("../data/" + file_name + ".csv", ios::out);
+                    if (!file.good())
+                        throw File_Exception("Blad otwierania pliku", &file);
+                }catch (File_Exception &ex){
+                    cout<<ex.what()<<endl;
                     delete backpack;
-                    exit(1);
+                    if(ex.get_file()->is_open())
+                        ex.get_file()->close();
+                    exit (1);
                 }
-
                 Item *tmp = backpack -> pop();
                 while (tmp != nullptr) {
                     file<<tmp->print_to_string()<<"\n";
@@ -354,24 +371,17 @@ int main(int argc, char *argv[]) {
                 file<<to_string(backpack->get_max_size())<<"\n";
                 file.close();
                 delete backpack;
-                cout << "saveLiczba pozostalych obiektow w pamieci: " << allo << "\n";
                 return 0;
             }
 
             case exit_without_saving:
-                cout << "Pa pa\n";
 
                 delete backpack;
-                cout << "Liczba pozostalych obiektow w pamieci: " << allo << "\n";
                 return 0;
 
-            default:
-                cout << "Error case 2\n" << endl;
-                delete backpack;
-                exit(1);
         }
 
-        cout << "************************************************************\n";
+        cout << "************************************************************\n\n";
     } while (true);
 
 
@@ -388,6 +398,12 @@ Item *create_item() {
 
         cin >> action;
 
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "Brak wybranej akcji\n\n";
+            continue;
+        }
         if (food <= action && action <= other)
             break;
 
@@ -413,33 +429,53 @@ Item *create_item() {
             }
         }
     } while (okay);
-    okay = 0;
+
     size = get_bigger(0, "Podaj rozmiar\n", "Nieprawidlowy rozmiar!\n\n");
 
     switch (action) {
         case food:
             do {
+                okay = false;
                 cout << "Podaj date przydatnosci do spozycia (nie moze zawierac \", \" oraz \"\\\"): ";
                 cin >> expiry_date;
                 for(int i = 0; i < expiry_date.length(); i++) {
                     if(expiry_date[i] == ',' || expiry_date[i] == '\\') {
-                        okay = 1;
+                        okay = true;
                         cout << "Znak " << name[i] << " jest nieprawidlowy!\n";
                     }
                 }
-            } while (okay == 1);
+            } while (okay);
             return new Food(name, size, expiry_date);
 
 
         case drink:
-            cout << "Podaj date przydatnosci do spozycia: ";
-            cin >> expiry_date;
+            do {
+                okay = false;
+                cout << "Podaj date przydatnosci do spozycia (nie moze zawierac \", \" oraz \"\\\"): ";
+                cin >> expiry_date;
+                for(int i = 0; i < expiry_date.length(); i++) {
+                    if(expiry_date[i] == ',' || expiry_date[i] == '\\') {
+                        okay = true;
+                        cout << "Znak " << name[i] << " jest nieprawidlowy!\n";
+                    }
+                }
+            } while (okay);
             volume = get_bigger(0, "Podaj objetosc\n", "Nieprawidlowa objetosc!\n\n");
             return new Drink(name, size, expiry_date, volume);
 
         case other:
             cout << "Podaj liczbe calkowita: ";
-            cin >> value;
+            do {
+                cin >> value;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cout << "Nieprawidlowa wartosc\n\n";
+                    continue;
+                }
+                break;
+            }while(true);
+
             return new Other(name, value, size);
 
 
@@ -464,6 +500,12 @@ T get_bigger(T const &t, string const &str1, string const &str2) {
     do {
         cout << str1;
         cin >> number;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(256, '\n');
+            cout<<str2;
+            continue;
+        }
         if (number <= t)
             cout << str2;
         else
